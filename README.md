@@ -8,6 +8,5 @@
   - [Final Project Visualization](https://howdenfr.github.io/CSC-362-Data-Vis-Final-Project/index.html)
 
 ## Cats Stats Projects
-
-
-
+  - [Field Hockey Penalty Corner Program](https://howdenfr.github.io/Field%20Hockey%20Penalty%20Corner%20Program)
+  - [Trackman Hitter/Pitcher Analysis](https://howdenfr.github.io/Trackman_code.py)
