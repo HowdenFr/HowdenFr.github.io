@@ -7,6 +7,6 @@
   - [Final Project Write Up](https://docs.google.com/document/d/1y5TTVyoqgJ9_-hZGVNOL11_LCA9WGgEF9algYB7mqmw/edit?tab=t.0#heading=h.apr14tbdqitt)
   - [Final Project Visualization](https://howdenfr.github.io/CSC-362-Data-Vis-Final-Project/index.html)
 
-## Cats Stats Projects <img scr ="https://catsstats.timchartier.com/wp-content/uploads/2022/01/new-pfp.png" width="200" height="200">
+## Cats Stats Projects <img scr ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjyCuFNQtDhUiGKzRTs_BFPRcnagpjAqc6sQ&s" width="200" height="200">
   - [Field Hockey Penalty Corner Program] (https://github.com/HowdenFr/HowdenFr.github.io/tree/main/Field%20Hockey%20Penalty%20Corner%20Program)
   - [Trackman Hitter/Pitcher Analysis](https://howdenfr.github.io/Trackman_code.py)
