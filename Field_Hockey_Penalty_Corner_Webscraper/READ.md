@@ -25,11 +25,12 @@ There are two types of website layouts which the program can handle. The first i
 When the user has inputed all changes for the program, the user can run the python file. The program creates a new google chrome window and runs through the schedule webscrapping stats. 
 
 When the program is over, it creates the .txt file. Photos below show what the program looks like webscrapping a box layout. 
+![Play-by-Play](https://github.com/HowdenFr/HowdenFr.github.io/blob/e4a9babd0c2a5b71a7b562732dcf654e9a900bb8/Field_Hockey_Penalty_Corner_Webscraper/img/Screenshot2025-11-07140816.png)
+
 ![Start of program](https://github.com/HowdenFr/HowdenFr.github.io/blob/e4a9babd0c2a5b71a7b562732dcf654e9a900bb8/Field_Hockey_Penalty_Corner_Webscraper/img/Screenshot2025-11-07140716.png)
 
 ![Going to a game](https://github.com/HowdenFr/HowdenFr.github.io/blob/e4a9babd0c2a5b71a7b562732dcf654e9a900bb8/Field_Hockey_Penalty_Corner_Webscraper/img/Screenshot2025-11-07140728.png)
 
-![Play-by-Play](https://github.com/HowdenFr/HowdenFr.github.io/blob/e4a9babd0c2a5b71a7b562732dcf654e9a900bb8/Field_Hockey_Penalty_Corner_Webscraper/img/Screenshot2025-11-07140816.png)
 
 ![text_file](https://github.com/HowdenFr/HowdenFr.github.io/blob/e4a9babd0c2a5b71a7b562732dcf654e9a900bb8/Field_Hockey_Penalty_Corner_Webscraper/img/Screenshot2025-11-07140829.png)
 
