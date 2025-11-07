@@ -1,7 +1,7 @@
 # 📌 Field Hockey Penalty Corner Webscraper Scout
 **by _Frank Howden_**
 
-**Project description**: Penalty Corners are an essential part of a field hockey team's offense. As such, teams who are defending against penalty corners must be ready for them. This program webscrapped play-by-play game logs for any D1 team 
+**Project description**: Penalty Corners are an essential part of a field hockey team's offense. As such, teams who are defending against penalty corners must be ready for them. This program webscrapped play-by-play game logs for any D1 Field Hockey Program. The user can chang inputs for certain website layouts and what words to search for the scrap the data. The program calculates penalty corner stats and logs the top 5 shot takers for penalty corners throughout the season.  
 
 ---
 
