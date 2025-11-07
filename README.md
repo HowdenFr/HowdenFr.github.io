@@ -1,7 +1,6 @@
 # Frank Howden Git Hub Website 
 ### [Linked In](https://www.linkedin.com/in/frank-howden-ab90ab289/)
-## CSC 362 Data Visualizations <img src="https://vibrantzone.com/wp-content/uploads/2025/05/animation-service-for-Data-Visualization.png" width="200" height="200">
-
+## ![CSC 362 Data Visualizations](https://github.com/HowdenFr/HowdenFr.github.io/blob/58a6c252771a66a2071727557a17dddbacb11ebe/Data_vis_pic.jpg)
   - [Lab 7](https://howdenfr.github.io/trails-skeleton/index.html)
   - [Lab 8](https://howdenfr.github.io/lab-8-advanced-topics-HowdenFr/index.html)
   - [Final Project Write Up](https://docs.google.com/document/d/1y5TTVyoqgJ9_-hZGVNOL11_LCA9WGgEF9algYB7mqmw/edit?tab=t.0#heading=h.apr14tbdqitt)
