@@ -9,7 +9,7 @@
 The project was completed in python. 
 
 🐍 Coding Language: **Python**  
-📚 Libraries: datetime, requests, selenium, time
+📚 Libraries: PIL, tkinter, csv, time
 🔗 [Link to code](https://github.com/HowdenFr/HowdenFr.github.io/blob/84ff512bf1dededcaeccb4ef3421f1618408196b/Field%20Hockey%20Penalty%20Corner%20Program/FieldHockeyProgram.py)
 
 ---
