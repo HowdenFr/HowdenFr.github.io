@@ -18,8 +18,17 @@ The project was completed in python.
 ---
 
 ## ⚾ Features of the Project  
-📝 Description: The program starts by looking for a roster of baseball players
-![roster lookup](img/
+📝 Description: The program starts by looking for a roster of baseball players. The roster correlates to the players that will be found in the csvs. 
+![roster lookup](Trackman_Code/img/Screenshot 2025-11-07 120018.png)
+
+Next, the program ask the user if they want to look at a season, just one game, or stop the program. At any point the user can click the stop button 
+and close the program down.
+![season or game](Trackman_Code/img/Screenshot 2025-11-07 120033.png)
+
+If the user clicks season, the program open new window with the following layout. 
+
+
+
 
 
 
