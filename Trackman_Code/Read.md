@@ -44,7 +44,7 @@ This window asks if the user wants the graph to be printed. If the user clicks y
 ![Player Graph](https://github.com/HowdenFr/HowdenFr.github.io/blob/0ecaa159e2476723ffdb90f1220367c0dd8cba1e/Trackman_Code/img/Screenshot2025-11-07120211.png)
 The graph contains a key on the right and the dots represent the pitches thrown or seen by a batter. 
 The user can hover over a pitch to see the pitch description. 
-![Pitch_hover](https://github.com/HowdenFr/HowdenFr.github.io/blob/0ecaa159e2476723ffdb90f1220367c0dd8cba1e/Trackman_Code/img/Screenshot2025-11-07120211.png)
+![Pitch_hover](https://github.com/HowdenFr/HowdenFr.github.io/blob/ed6bd8850e8fd5dc68bf12e1960855fd56ca26cc/Trackman_Code/img/Screenshot2025-11-07120221.png)
 
 If the user puts in filters which don't find any data, a box Selection Error window will appear. 
 ![selection_error](https://github.com/HowdenFr/HowdenFr.github.io/blob/0ecaa159e2476723ffdb90f1220367c0dd8cba1e/Trackman_Code/img/Screenshot2025-11-07120131.png)
