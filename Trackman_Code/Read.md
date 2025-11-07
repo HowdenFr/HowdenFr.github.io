@@ -13,7 +13,7 @@ The project was completed in python.
 
 🐍 Coding Language: **Python**  
 📚 Libraries: Pandas, Matplotlib, tkinter, mplcursors 
-🔗 [Link to code](Trackman_Code/code)
+🔗 [Link to code](https://github.com/HowdenFr/HowdenFr.github.io/blob/528fcb6c3b3a2a9af246a35bc5d3bd42cd8f42f3/Trackman_Code/code/Trackman_code.py)
 
 ---
 
