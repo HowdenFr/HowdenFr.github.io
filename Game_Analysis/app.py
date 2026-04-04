@@ -45,6 +45,8 @@ st.title("Baseball Player Analysis")
 
 st.header("Upload Files")
 
+st.write("Upload your Trackman and TruMedia Excel files. You can select multiple files for each type.")
+
 # Upload multiple Trackman Excel files
 trackman_files = st.file_uploader("Upload Trackman Excel files", type=['xlsx', 'xls'], accept_multiple_files=True)
 
