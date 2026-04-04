@@ -51,7 +51,7 @@ st.write("Upload your Trackman and TruMedia Excel files. You can select multiple
 trackman_files = st.file_uploader("Upload Trackman Excel files", type=['xlsx', 'xls','csv'], accept_multiple_files=True)
 
 # Upload multiple TruMedia Excel files
-truMedia_files = st.file_uploader("Upload TruMedia Excel files", type=['xlsx', 'xls','csv], accept_multiple_files=True)
+truMedia_files = st.file_uploader("Upload TruMedia Excel files", type=['xlsx', 'xls','csv'], accept_multiple_files=True)
 
 if st.button("Analyze"):
     if not trackman_files or not truMedia_files:
