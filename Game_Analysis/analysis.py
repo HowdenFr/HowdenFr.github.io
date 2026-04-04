@@ -12,38 +12,6 @@ import os
 import glob
 
 
-def file_input():
-    """
-    This function takes in the trackman and truMedia csvs and returns them as dataframes. 
-    """
-    # Get the file paths for the trackman and truMedia csvs
-    #trackman_path_input = input("Enter the file path for the trackman csv, can enter multiple: ")
-    #truMedia_path_input = input("Enter the file path for the truMedia csv: ")
-
-    # Read the csvs into dataframes
-    trackman_df = pd.read_csv("trackman_test.csv")
-    truMedia_df = pd.read_csv("Tru Media CSVs\Davidson - Cats Stats Player Stats.csv")
-
-    #makes the trackman csvs into one csv, then reads it into a dataframe
-
-    with open ('trackman_test.csv', 'w') as outputfile:
-        inputFileList = glob.glob("Trackman CSVs/02-21-25 -- 02-23-25\*.csv")
-        first_file = True
-        for inputFile in inputFileList:
-            with open(inputFile, 'r') as sourcefile:
-                lines = sourcefile.readlines()
-                if first_file:
-                    # Write all lines including header for the first file
-                    outputfile.writelines(lines)
-                    first_file = False
-                else:
-                    # Skip the first line (header) for subsequent files
-                    if len(lines) > 1:
-                        outputfile.writelines(lines[1:])
-            outputfile.write("\n")
-    trackman_df=pd.read_csv("trackman_test.csv")
-
-    return trackman_df, truMedia_df
 
 def analyze_batting_performance(merge_df):
     """
@@ -168,24 +136,3 @@ def create_excel_output(analysis_df):
         .background_gradient(subset=['xAVG'], cmap='RdYlGn', vmin=0.200, vmax=0.350)
 
     styled_df.to_excel('batter_analysis_graded.xlsx', engine='openpyxl', index=False)
-    
-
-def run_analysis():
-    """
-    This function runs the entire analysis process and outputs the final graded CSV.
-    """
-    trackman_df, truMedia_df =file_input()
-    
-    # trackman_df=pd.read_csv("trackman_test.csv")
-    # truMedia_df=pd.read_csv("Tru Media CSVs\Davidson - Cats Stats Player Stats 02-21-25 -- 02-23-25.csv")
-    batter_analysis_df = merge_datasets(trackman_df, truMedia_df)  
-    analyze_batting_performance(batter_analysis_df)
-
-    dataframe=pd.read_csv('batter_analysis.csv')
-    create_excel_output(dataframe)
-    
-    
-
-if __name__ == "__main__":
-    run_analysis()  
-
