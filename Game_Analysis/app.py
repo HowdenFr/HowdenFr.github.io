@@ -60,14 +60,14 @@ if st.button("Analyze"):
         # Concatenate Trackman files
         trackman_dfs = []
         for file in trackman_files:
-            df = pd.read_excel(file)
+            df = pd.read_csv(file)
             trackman_dfs.append(df)
         trackman_df = pd.concat(trackman_dfs, ignore_index=True)
 
         # Concatenate TruMedia files
         truMedia_dfs = []
         for file in truMedia_files:
-            df = pd.read_excel(file)
+            df = pd.read_csv(file)
             truMedia_dfs.append(df)
         truMedia_df = pd.concat(truMedia_dfs, ignore_index=True)
 
