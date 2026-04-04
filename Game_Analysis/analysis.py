@@ -28,8 +28,11 @@ def analyze_batting_performance(merge_df):
                     else 'OffSpeed'))
 
     dataset['Outside'] = dataset[['PlateLocSide','PlateLocHeight']].apply(
-        lambda x: 1 if((x[1]<=1.50000 or x[1]>=3.50000) or (x[0]<=-0.90000 or x[0]>=0.90000)) 
-                    else 0, axis=1)
+    lambda x: 1 if ((x['PlateLocHeight'] <= 1.5 or x['PlateLocHeight'] >= 3.5) or
+                    (x['PlateLocSide'] <= -0.9 or x['PlateLocSide'] >= 0.9))
+    else 0,
+    axis=1
+)
     
     dataset['LaRange'] = dataset['Angle'].apply(lambda x: 2 if x >= 10 and x <= 20
                                                 else 1 if (x > 20 and x <= 25) or (x >= 5 and x < 10)
