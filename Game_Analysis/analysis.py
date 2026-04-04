@@ -53,19 +53,19 @@ def analyze_batting_performance(merge_df):
     
     dataset['DamageZone'] = dataset['LaRange'] + dataset['EVRange']
 
-    dataset['DZoneTake']=dataset[['Outside','PitchType','PitchCall']].apply(lambda x: -2 if x[0] == 0 
-                                                                        and x[1]=='Fastball' 
-                                                                        and x[2]=='StrikeCalled'  else 0, axis=1)
+    dataset['DZoneTake']=dataset[['Outside','PitchType','PitchCall']].apply(lambda x: -2 if x['Outside'] == 0 
+                                                                        and x['PitchType']=='Fastball' 
+                                                                        and x['PitchCall']=='StrikeCalled'  else 0, axis=1)
 
     dataset['KScoring']=dataset['PitchCall'].apply(lambda x: -2 if x=='StrikeCalled' 
                                                    else -1.5 if x=='StrikeSwinging'
                                                    else 0)
     
-    dataset['CZoneSwingPts']=dataset[['Outside','PitchCall']].apply(lambda x: -1 if x[0] == 1 and x[1]=='StrikeSwinging'
+    dataset['CZoneSwingPts']=dataset[['Outside','PitchCall']].apply(lambda x: -1 if x['Outside'] == 1 and x['PitchCall']=='StrikeSwinging'
                                                                   else 0, axis=1)
     
-    dataset['CZoneTakePts']=dataset[['Outside','PitchCall']].apply(lambda x: 0.25 if x[0] == 1
-                                                                             and x[1]=='BallCalled' 
+    dataset['CZoneTakePts']=dataset[['Outside','PitchCall']].apply(lambda x: 0.25 if x['Outside'] == 1
+                                                                             and x['PitchCall']=='BallCalled' 
                                                                              else 0, axis=1)
     dataset['RScore']=dataset['RunsScored'] + dataset['PlayResult'].apply(lambda x: 1 if x=='Single' 
                                                                           else 2 if x=='Double'
