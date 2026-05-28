@@ -93,10 +93,6 @@ def merge_datasets(trackman_df, truMedia_df):
     # Merge the trackman and truMedia dataframes on the appropriate columns (e.g., player name, date, etc.)
     batter_df_columns=['Batter', 'BatterTeam', 'BatterSide','PlateLocHeight', 'PlateLocSide', 'PitchCall', 'KorBB', 'PlayResult', 'ExitSpeed', 'Angle', 'TaggedPitchType','RunsScored']
     batter_df=trackman_df.loc[trackman_df['BatterTeam']=='DAV_WIL',batter_df_columns].copy()
-
-    
-    truMedia_df['trackman_name']=truMedia_df['player'] + ', ' + truMedia_df['playerFirstName']
-    
     
     merge_df = pd.merge(batter_df, truMedia_df, left_on='Batter', right_on='trackman_name', how='inner')
    
