@@ -9,6 +9,8 @@ scraper script.
 from __future__ import annotations
 
 import os
+import sys
+import shutil
 from pathlib import Path
 
 from selenium import webdriver
@@ -16,7 +18,7 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
+
 
 WORKSPACE = Path(__file__).resolve().parent
 PAGE_LOAD_TIMEOUT = 20
@@ -33,6 +35,7 @@ def create_driver(headless: bool = True) -> webdriver.Chrome:
     from selenium.webdriver.chrome.options import Options
     from selenium.webdriver.chrome.service import Service
 
+    
     options = Options()
 
     if headless:
@@ -42,30 +45,35 @@ def create_driver(headless: bool = True) -> webdriver.Chrome:
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920,1080")
 
+      # If chromedriver is not already on PATH, use SeleniumBase to download it
+    # into its managed drivers folder, then expose it on PATH for Selenium.
+    chromedriver_path = shutil.which("chromedriver")
+    if chromedriver_path is None:
+        os.system("sbase get chromedriver")
+        sb_driver_dir = Path.home() / ".local" / "lib" / f"python{sys.version_info.major}.{sys.version_info.minor}" / "site-packages" / "seleniumbase" / "drivers"
+        for candidate in [sb_driver_dir / "chromedriver", sb_driver_dir / "chromedriver.exe"]:
+            if candidate.exists():
+                chromedriver_path = str(candidate)
+                break
+
+    if chromedriver_path:
+        service = Service(executable_path=chromedriver_path)
+    else:
+        # Last resort: let Selenium Manager attempt resolution.
+        service = Service()
+
     chromium_candidates = [
         "/usr/bin/chromium",
         "/usr/bin/chromium-browser",
         "/usr/bin/google-chrome",
         "/usr/bin/google-chrome-stable",
     ]
-    chromedriver_candidates = [
-        "/usr/bin/chromedriver",
-        "/usr/local/bin/chromedriver",
-    ]
 
     chromium_path = next((path for path in chromium_candidates if os.path.exists(path)), None)
-    chromedriver_path = next((path for path in chromedriver_candidates if os.path.exists(path)), None)
 
-    if chromium_path and chromedriver_path:
+    if chromium_path:
         options.binary_location = chromium_path
-        service = Service(executable_path=chromedriver_path)
-    else:
-        # Selenium Manager works for most local installs; webdriver-manager is
-        # a fallback for older environments or stripped-down setups.
-        try:
-            service = Service()
-        except Exception:
-            service = Service(executable_path=ChromeDriverManager().install())
+        
 
     driver = webdriver.Chrome(service=service, options=options)
     driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
