@@ -9,8 +9,8 @@ scraper script.
 from __future__ import annotations
 
 import os
-import sys
 import shutil
+from contextlib import suppress
 from pathlib import Path
 
 from selenium import webdriver
@@ -35,7 +35,6 @@ def create_driver(headless: bool = True) -> webdriver.Chrome:
     from selenium.webdriver.chrome.options import Options
     from selenium.webdriver.chrome.service import Service
 
-    
     options = Options()
 
     if headless:
@@ -45,37 +44,51 @@ def create_driver(headless: bool = True) -> webdriver.Chrome:
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920,1080")
 
-      # If chromedriver is not already on PATH, use SeleniumBase to download it
-    # into its managed drivers folder, then expose it on PATH for Selenium.
+    # Prefer system-installed binaries from packages.txt on Streamlit Cloud.
     chromedriver_path = shutil.which("chromedriver")
-    if chromedriver_path is None:
-        os.system("sbase get chromedriver")
-        sb_driver_dir = Path.home() / ".local" / "lib" / f"python{sys.version_info.major}.{sys.version_info.minor}" / "site-packages" / "seleniumbase" / "drivers"
-        for candidate in [sb_driver_dir / "chromedriver", sb_driver_dir / "chromedriver.exe"]:
-            if candidate.exists():
-                chromedriver_path = str(candidate)
+    chromium_path = next(
+        (
+            path
+            for path in [
+                "/usr/bin/chromium",
+                "/usr/bin/chromium-browser",
+                "/usr/bin/google-chrome",
+                "/usr/bin/google-chrome-stable",
+            ]
+            if os.path.exists(path)
+        ),
+        None,
+    )
+
+    # If Chromium is installed but the driver is not on PATH, check the common
+    # apt install location before falling back to Selenium Manager.
+    if not chromedriver_path:
+        for path in ["/usr/bin/chromedriver", "/usr/local/bin/chromedriver"]:
+            if os.path.exists(path):
+                chromedriver_path = path
                 break
+
+    if chromium_path:
+        options.binary_location = chromium_path
 
     if chromedriver_path:
         service = Service(executable_path=chromedriver_path)
     else:
-        # Last resort: let Selenium Manager attempt resolution.
         service = Service()
 
-    chromium_candidates = [
-        "/usr/bin/chromium",
-        "/usr/bin/chromium-browser",
-        "/usr/bin/google-chrome",
-        "/usr/bin/google-chrome-stable",
-    ]
+    try:
+        driver = webdriver.Chrome(service=service, options=options)
+    except Exception as exc:
+        browser_hint = chromium_path or "not found"
+        driver_hint = chromedriver_path or "not found"
+        raise RuntimeError(
+            "Chrome could not start in Streamlit Cloud. "
+            f"Chromium path: {browser_hint}. "
+            f"Chromedriver path: {driver_hint}. "
+            "Make sure packages.txt includes chromium and chromium-driver, "
+            "then redeploy the app."
+        ) from exc
 
-    chromium_path = next((path for path in chromium_candidates if os.path.exists(path)), None)
-
-    if chromium_path:
-        options.binary_location = chromium_path
-        
-
-    driver = webdriver.Chrome(service=service, options=options)
     driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
     return driver
 
@@ -128,12 +141,22 @@ def url_decider(url: str, scouted_team: str):
     """
     Create one driver, detect layout, and run the matching scraper.
     """
-    driver = create_driver(headless=True)
+    driver = None
     try:
+        driver = create_driver(headless=True)
         layout = detect_layout(driver, url)
         return launch_scraper(layout, url, scouted_team, driver)
-    except NoSuchElementException:
-        print("element not found in url \n try again")
-        return None
+    except NoSuchElementException as exc:
+        raise RuntimeError(
+            "The page structure did not match what the scraper expected. "
+            "Please verify the URL is a valid SideArm schedule or boxscore page."
+        ) from exc
+    except Exception as exc:
+        raise RuntimeError(
+            "The scraper ran into a browser startup or page-loading problem. "
+            "Check the Streamlit Cloud logs for the exact Chrome/driver error."
+        ) from exc
     finally:
-        driver.quit()
+        with suppress(Exception):
+            if driver is not None:
+                driver.quit()
