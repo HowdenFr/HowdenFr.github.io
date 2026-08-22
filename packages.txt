@@ -1,7 +1,5 @@
 chromium
 chromium-driver
-chromium-browser
-chromium-chromedriver
 libnss3
 libx11-6
 libx11-xcb1
