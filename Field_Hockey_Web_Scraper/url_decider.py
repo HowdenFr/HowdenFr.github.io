@@ -85,7 +85,7 @@ def create_driver(headless: bool = True) -> webdriver.Chrome:
             "Chrome could not start in Streamlit Cloud. "
             f"Chromium path: {browser_hint}. "
             f"Chromedriver path: {driver_hint}. "
-            "Make sure packages.txt includes chromium and chromium-driver, "
+            f"Original error: {type(exc).__name__}: {exc}. "
             "then redeploy the app."
         ) from exc
 
@@ -154,7 +154,7 @@ def url_decider(url: str, scouted_team: str):
     except Exception as exc:
         raise RuntimeError(
             "The scraper ran into a browser startup or page-loading problem. "
-            "Check the Streamlit Cloud logs for the exact Chrome/driver error."
+              f"Original error: {type(exc).__name__}: {exc}."
         ) from exc
     finally:
         with suppress(Exception):
