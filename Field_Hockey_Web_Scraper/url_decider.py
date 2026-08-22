@@ -31,24 +31,40 @@ PAGE_LOAD_TIMEOUT = 20
 
 def create_driver(headless: bool = True) -> webdriver.Chrome:
     """
-    Create a Selenium Chrome driver for layout detection.
+    Create a Chrome WebDriver that works both locally and on Streamlit Cloud.
 
-    Args:
-        headless: If True, hide the browser window while loading pages.
-
-    Returns:
-        A configured Chrome WebDriver instance.
+    Streamlit Cloud runs on Linux and uses Chromium installed via apt-get.
+    The binary paths are different from a local Windows/Mac install, so we
+    check for the Streamlit Cloud paths first and fall back to defaults
+    for local development.
     """
-    options = Options()
-    if headless:
-        options.add_argument("--headless=new")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.chrome.service import Service
+    import os
 
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()),
-        options=options,
-    )
+    options = Options()
+
+    # --- Always headless on a server (no display available) ---
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")           # required on Linux servers
+    options.add_argument("--disable-dev-shm-usage") # prevents memory crashes
+    options.add_argument("--disable-gpu")           # no GPU on cloud servers
+    options.add_argument("--window-size=1920,1080")
+
+    # --- Detect Streamlit Cloud vs local ---
+    # Streamlit Cloud installs Chromium via apt at this path
+    chromium_path = "/usr/bin/chromium"
+    chromedriver_path = "/usr/bin/chromedriver"
+
+    if os.path.exists(chromium_path):
+        # We're on Streamlit Cloud — point directly at the apt-installed binaries
+        options.binary_location = chromium_path
+        service = Service(executable_path=chromedriver_path)
+    else:
+        # We're local — let Selenium Manager find the right driver automatically
+        service = Service()  # Selenium 4.6+ handles this with no arguments
+
+    driver = webdriver.Chrome(service=service, options=options)
     driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
     return driver
 
