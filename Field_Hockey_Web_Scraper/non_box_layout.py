@@ -41,7 +41,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from sqlalchemy import true
 
 # Our stats engine from the other file
 from penalty_corner_stats import compute_penalty_corner_stats, print_stats_report

@@ -15,7 +15,6 @@ All plays must be in a list called `plays`, sorted chronologically.
 import re
 from dataclasses import dataclass, field
 from typing import Optional
-from pathlib import Path
 
 
 # ---------------------------------------------------------------------------
