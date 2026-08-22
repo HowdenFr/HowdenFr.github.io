@@ -57,6 +57,7 @@ def create_driver(headless: bool = True) -> webdriver.Chrome:
     if os.path.exists(chromium_path):
         # We're on Streamlit Cloud — point directly at the apt-installed binaries
         options.binary_location = chromium_path
+
         service = Service(executable_path=chromedriver_path)
     else:
         # We're local — let Selenium Manager find the right driver automatically
