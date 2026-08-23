@@ -95,7 +95,7 @@ def calc_total_penalty_corners(element, totalPCFor, totalPCAgainst,teamName):
     #go to adjacent element
     
     td_tags=element.find_elements(By.TAG_NAME, "td")
-    if(td_tags[0].text.lower()==teamName):
+    if(td_tags[0].text.lower()==teamName.lower()):
         
         for i in range(1,5):
             totalPCFor+=int(td_tags[i].text)
